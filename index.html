@@ -10,13 +10,32 @@
 
 <link rel="stylesheet" href="./style/jquery.maximage.min.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="./style/screen.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="./style/sweet-alert.css" type="text/css" media="screen" charset="utf-8" />
 <style type="text/css">
+	body{
+		font-family: '微软雅黑';
+		font-size: 16px;
+	}
 	.type-word{
 		margin-top: 100px;
 		margin-left: 100px;
-		color:#FFF;
+		color:#FFF;		
+		height: 26px;
+		line-height: 26px;
+	}
+	.btn{
+		margin: 10px 20px;
+		height: 26px;
+		width: 60px;
 		font-family: '微软雅黑';
-		font-size: 16px;
+		font-size: 12px;
+		cursor: pointer;
+		float: left;
+		background-color: #3385ff;
+		text-align: center;
+	}
+	.btn:hover{
+		background-color: #317ef3;
 	}
 
 </style>
@@ -31,10 +50,12 @@
 <script src="./script/jquery-1.11.1.min.js"></script>
 <script src="./script/jquery.cycle.all.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="./script/jquery.maximage.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./script/sweet-alert.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
-var text = '<p>To 美吕：</p><p>从现在开始，我只疼你一个，宠你，不会骗你。</p><p>答应你的每一件事情，我都会做得到，对你讲的每一句话，都是真话。</p><p>不欺负你，不骂你，相信你。</p><p>有人欺负你，我会在第一时间来帮你。</p><p>你开心的时候，我会陪着你开心；你不开心，我也会哄着你开心。</p><p>永远觉得你最漂亮，做梦都会梦见你。</p><p>在我的心里，只有你！</p><p>From 胖牛</p>';
+var text = '<p>To 美吕：</p><p>从现在开始，我只疼你一个，宠你，不会骗你。</p><p>答应你的每一件事情，我都会做得到，对你讲的每一句话，都是真话。</p><p>不欺负你，不骂你，相信你。</p><p>有人欺负你，我会在第一时间来帮你。</p><p>你开心的时候，我会陪着你开心；你不开心，我也会哄着你开心。</p><p>永远觉得你最漂亮，做梦都会梦见你。</p><p>在我的心里，只有你！</p><p>From 胖牛</p><p>~</p><p>那么问题来了：</p><p>嫁给我吧！</p>';
 var length = text.length+1;
 var i = 0;
+$('#typeWords').html(text);
 function type () {
 	if(i<length){
 		while(text.substr(i,1)=='<'){
@@ -53,7 +74,26 @@ function type () {
 }
 $(function(){
 	$('#maximage').maximage();
-	type();
+	// setTimeout(type,2000);
+	$('#typeWords').append($('<div class="btn" id="Yes">好滴</div>')
+		.bind('click',function(){
+			swal({
+				title: "嘿嘿嘿",
+				text: "佳人配才子啊",
+				type: "success",
+				confirmButtonText: "那是" 
+			});
+		})
+	).append($('<div class="btn" id="No">呸</div>')
+		.bind('click',function(){
+			swal({
+				title: "WHAT",
+				text: "你是头猪么？",
+				type: "error",
+				confirmButtonText: "是的" 
+			});
+		})
+	);
 });
 </script>
 </body>
