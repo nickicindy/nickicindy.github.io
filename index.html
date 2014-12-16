@@ -55,7 +55,6 @@
 var text = '<p>To 美吕：</p><p>从现在开始，我只疼你一个，宠你，不会骗你。</p><p>答应你的每一件事情，我都会做得到，对你讲的每一句话，都是真话。</p><p>不欺负你，不骂你，相信你。</p><p>有人欺负你，我会在第一时间来帮你。</p><p>你开心的时候，我会陪着你开心；你不开心，我也会哄着你开心。</p><p>永远觉得你最漂亮，做梦都会梦见你。</p><p>在我的心里，只有你！</p><p>From 胖牛</p><p>~</p><p>那么问题来了：</p><p>嫁给我吧！</p>';
 var length = text.length+1;
 var i = 0;
-$('#typeWords').html(text);
 function type () {
 	if(i<length){
 		while(text.substr(i,1)=='<'){
@@ -70,12 +69,7 @@ function type () {
 	}else{
 		var show = text.substring(0,--i);
 		$('#typeWords').html(show);
-	}
-}
-$(function(){
-	$('#maximage').maximage();
-	// setTimeout(type,2000);
-	$('#typeWords').append($('<div class="btn" id="Yes">好滴</div>')
+		$('#typeWords').append($('<div class="btn" id="Yes">好滴</div>')
 		.bind('click',function(){
 			swal({
 				title: "嘿嘿嘿",
@@ -94,6 +88,11 @@ $(function(){
 			});
 		})
 	);
+	}
+}
+$(function(){
+	$('#maximage').maximage();
+	setTimeout(type,2000);
 });
 </script>
 </body>
