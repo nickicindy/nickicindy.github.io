@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cindy&Nick's Happiness Time</title>
+	<meta name="description" content="Cindy,Nick">
+	<meta charset="utf-8">
+	<style type="text/css">
+		body{
+			font-family: 'Microsoft YaHei';
+		}
+		.type-word{
+			color: #F00;
+			margin: 40px auto 0;
+			width: 300px;
+			font-size: 16px;
+		}
+		.survey-container{
+			width: 800px;
+			height: 450px;
+			margin: 0 auto;
+			background-image: url('./asset/smile.jpg');
+			display: none;
+		}
+		.result-container{
+			width: 820px;
+			height: 632px;
+			margin: 0 auto;
+			background-color: #FFF;
+			display: none;
+		}
+		.survey-title{
+			color: #FFF;
+			font-weight: bold;
+		}
+		.result-title{
+			color: #4d90fe;
+			font-weight: bold;
+			height: 20px;
+			line-height: 20px;
+			border-bottom: 1px solid #CCC;
+		}
+		.survey-content{
+			margin-top: 15px;
+			line-height: 26px;
+		}
+		.survey-table{
+			color: #FFF;
+			width: 100%;
+			text-align: left;
+			border-collapse: separate;
+			border-spacing: 1px;
+		}
+		.survey-table label{
+			cursor: pointer;
+		}
+		.btn{
+			margin: 10px 20px;
+			height: 26px;
+			line-height: 26px;
+			color: #FFF;
+			width: 60px;
+			font-family: 'Microsoft YaHei';
+			font-size: 12px;
+			float: left;
+			cursor: pointer;
+			background-color: #AEDEF4;
+			text-align: center;
+		}
+		.btn:hover{
+			background-color: #A7D5EA;
+		}
+		.answer-img{
+			float:left;
+			width:273px;
+			height:204px;
+			visibility:hidden;
+		}
+	</style>
+</head>
+<body style="background:#000">
+	<div id="typeWords" class="type-word"></div>
+	<div id="Survey" class="survey-container"></div>
+	<div id="Result" class="result-container">
+		<div class="result-title">一共答对了<span id="resultCount" style="color:#F00;"></span>道题！提供钻戒线索如下图。</div>
+		<img id="resultImg0" class="answer-img" src="./asset/answer/answer1.jpg">
+		<img id="resultImg2" class="answer-img" src="./asset/answer/answer3.jpg">
+		<img id="resultImg1" class="answer-img" src="./asset/answer/answer2.jpg">
+		<img id="resultImg6" class="answer-img" src="./asset/answer/answer7.jpg">
+		<img id="resultImg8" class="answer-img" src="./asset/answer/answer9.jpg">
+		<img id="resultImg7" class="answer-img" src="./asset/answer/answer8.jpg">
+		<img id="resultImg3" class="answer-img" src="./asset/answer/answer4.jpg">
+		<img id="resultImg5" class="answer-img" src="./asset/answer/answer6.jpg">
+		<img id="resultImg4" class="answer-img" src="./asset/answer/answer5.jpg">
+	</div>
+	<object height="0" width="0" data="./asset/betterme.mp3"></object>
+	<script src="./script/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		var right_answer = [];
+		var text = '<p>美吕：</p><p>你以为事情就这么轻松结束了么？</p><p>嘿嘿，钻戒可不是那么好拿的。</p><p>开动你的脑筋吧。</p>';
+		var length = text.length+1;
+		var i = 0;
+		function type () {
+			if(i<length){
+				while(text.substr(i,1)=='<'){
+					i +=3;
+					if(text.substr(i,1)=='>'){
+						i++;
+					}
+				}
+				var show = text.substring(0,i++)+'_';
+				$('#typeWords').html(show);
+				setTimeout("type()",200);
+			}else{
+				var show = text.substring(0,--i);
+				$('#typeWords').html(show);
+				$('#Survey').fadeIn();
+				$('#surveyIndex0').fadeIn();
+			}
+		};
+
+		var items=[{
+			question:'1.美吕和胖牛是怎么认识的？',
+			option:['美吕美，胖牛搭讪','胖牛帅，美吕搭讪','邂逅']
+		},{
+			question:'2.美吕和胖牛第一次约会是做什么？',
+			option:['吃饭','看电影','逛校园']
+		},{
+			question:'3.美吕和胖牛是哪天开始在一起的？',
+			option:['2012-05-10','2012-05-20','2012-05-30']
+		},{
+			question:'4.胖牛第一次去美吕家是哪天？',
+			option:['2013-10-01','2013-10-03','2013-10-05']
+		},{
+			question:'5.美吕第一次去胖牛家是哪天？',
+			option:['2014-05-01','2014-05-21','2014-05-31']
+		},{
+			question:'6.美吕和胖牛的家长是哪天会晤的？',
+			option:['2014-10-03','2014-10-04','2014-10-05']
+		},{
+			question:'7.美吕和胖牛是哪天一起落户上海的？',
+			option:['2014-10-24','2014-10-25','2014-10-26']
+		},{
+			question:'8.美吕和胖牛准备哪天领证？',
+			option:['2014-12-20','2014-12-25','2015-01-01']
+		},{
+			question:'9.胖牛身高多少？',
+			option:['175cm','180cm','185cm']
+		}];
+
+		var answer=[0,1,1,2,2,1,1,0,1];
+
+		$(function(){
+			var survey='';
+			$.each(items,function(index,value){
+				survey +='<div style="padding:30px;display:none;" id="surveyIndex'+index+'">\
+						<div class="survey-title">'+value.question+'<span id="Tips'+index+'" style="color:red;display:none;">题目必须回答哦</span></div>\
+						<div class="survey-content"><table class="survey-table"><tbody>'
+
+				$.each(value.option,function(i,v){
+					survey +='<tr><td><label><input class="" name="radio'+index+'" type="radio" value="'+i+'">'+v+'</label></td></tr>';
+				});						
+				
+				survey +='</tbody></table></div><div>'+(index==0?'':'<div class="btn btnPrev" _index="'+index+'">上一题</div>')+'<div class="btn btnNext" _index="'+index+'">'+(index==8?'完成':'下一题')+'</div></div></div>';
+			});
+			$('#Survey').empty().append(survey);
+			//下一题
+			$('.btnNext').bind('click',function(){
+				var _index = $(this).attr('_index');
+				if($("input[type='radio'][name='radio"+_index+"']:checked").length == 0){
+					$('#Tips'+_index).show();
+				}else{
+					if(_index==8){
+						new_answer=[];
+						for(var i=0;i<9;i++){
+							if($('input[type="radio"][name="radio'+i+'"]:checked').val()==answer[i]){
+								right_answer.push(i);
+								$('#resultImg'+i).css('visibility','visible');
+							}
+						}
+						
+						var right_count = right_answer.length;
+						$('#Result #resultCount').text(right_count);
+						$('#Survey').hide();
+						$('#Result').fadeIn();
+
+					}else{
+						$('#surveyIndex'+_index).hide();
+						$('#surveyIndex'+(++_index)).show();
+					}
+				}
+			});
+			$('.btnPrev').bind('click',function(){
+				var _index = $(this).attr('_index');
+				$('#surveyIndex'+_index).hide();
+				$('#surveyIndex'+(--_index)).show();
+			});
+			setTimeout(type,1000);
+		});
+	</script>
+</body>
+</html>

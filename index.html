@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!-->
 <html>
 <title>Cindy&Nick's Happiness Time</title>
-<meta name="description" content="Cindy,Nick,JS,HTML5,CSS3">
+<meta name="description" content="Cindy,Nick">
 <meta charset="utf-8">
 
 <link rel="stylesheet" href="./style/jquery.maximage.min.css" type="text/css" media="screen" charset="utf-8" />
@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="./style/sweet-alert.css" type="text/css" media="screen" charset="utf-8" />
 <style type="text/css">
 	body{
-		font-family: '微软雅黑';
+		font-family: 'Microsoft YaHei';
 		font-size: 16px;
 	}
 	.type-word{
@@ -27,15 +27,15 @@
 		margin: 10px 20px;
 		height: 26px;
 		width: 60px;
-		font-family: '微软雅黑';
+		font-family: 'Microsoft YaHei';
 		font-size: 12px;
 		cursor: pointer;
 		float: left;
-		background-color: #3385ff;
+		background-color: #AEDEF4;
 		text-align: center;
 	}
 	.btn:hover{
-		background-color: #317ef3;
+		background-color: #A7D5EA;
 	}
 
 </style>
@@ -44,9 +44,12 @@
 <div id="typeWords" class="type-word"></div>
 <div id="maximage">
 	<img src="./asset/image1.jpg" alt="" width="1400" height="1050" />
-	<img src="./asset/image2.jpg" alt="coalesse" width="1400" height="1050" />
+	<img src="./asset/image2.jpg" alt="" width="1400" height="1050" />
+	<img src="./asset/image3.jpg" alt="" width="1400" height="1050" />
+	<img src="./asset/image4.jpg" alt="" width="1400" height="1050" />
+	<img src="./asset/image5.jpg" alt="" width="1400" height="1050" />
 </div>
-
+<object height="0" width="0" data="./asset/marryyou.mp3"></object>
 <script src="./script/jquery-1.11.1.min.js"></script>
 <script src="./script/jquery.cycle.all.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="./script/jquery.maximage.min.js" type="text/javascript" charset="utf-8"></script>
@@ -74,17 +77,50 @@ function type () {
 			swal({
 				title: "嘿嘿嘿",
 				text: "佳人配才子啊",
-				type: "success",
-				confirmButtonText: "那是" 
+				imageUrl: "./asset/kiss.jpg",
+				confirmButtonText: "那是",
+				closeOnConfirm: false 
+			},
+			function(){
+				swal({   
+					title: "送你",   
+					text: "不要客气",   
+					imageUrl: "./asset/ring.jpg",
+					confirmButtonText: "喵"
+				},
+				function(){
+					location.href = 'accept.html';
+				});
 			});
 		})
 	).append($('<div class="btn" id="No">呸</div>')
 		.bind('click',function(){
 			swal({
 				title: "WHAT",
-				text: "你是头猪么？",
-				type: "error",
-				confirmButtonText: "是的" 
+				text: "你是猪么？",
+				imageUrl: "./asset/pig.jpg",
+				confirmButtonText: "是的",
+				showCancelButton: true,
+				cancelButtonText: "不是",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			},
+			function(flag){
+				if(flag){
+					swal({   
+						title: "乖",
+						text: "再给你次选择的机会",   
+						imageUrl: "./asset/repeat.png",
+						confirmButtonText: "喵"
+					});
+				}else{
+					swal({   
+						title: "猪都是这么认为的",
+						text: "别挣扎了，程序是我写的",   
+						imageUrl: "./asset/reject.jpg",
+						confirmButtonText: "我错了"
+					});
+				}
 			});
 		})
 	);
